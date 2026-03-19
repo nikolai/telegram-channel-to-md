@@ -228,14 +228,14 @@ def telegram_to_markdown(text: str, entities: list | None) -> str:
         output = "\n".join(result_lines)
 
     # 5. Исправляем code blocks: ``` должны быть на отдельных строках
-    # Telegram возвращает: text```\ncode\ncode```text
-    # Нужно:              text\n```\ncode\ncode\n```\ntext
-    # Паттерн 1: текст перед открывающим ```
+    # Паттерн 1: текст прямо перед открывающим ``` (без переноса)
     output = re.sub(r'([^\n])```(\w*)\n', r'\1\n```\2\n', output)
-    # Паттерн 2: закрывающий ``` с текстом после
-    output = re.sub(r'\n```([^\n])', r'\n```\n\1', output)
-    # Паттерн 3: если ``` в начале строки, но без переноса перед
+    # Паттерн 2: текст прямо после закрывающего ``` (без переноса)
+    output = re.sub(r'([^\n`])```(\s)', r'\1\n```\2', output)
+    # Паттерн 3: текст прямо перед закрывающим ``` в конце строки
     output = re.sub(r'([^\n])```(\w*)$', r'\1\n```\2', output, flags=re.MULTILINE)
+    # Паттерн 4: ``` в начале строки, но код идёт на той же строке (главный случай)
+    output = re.sub(r'^```([^`\n])', r'```\n\1', output, flags=re.MULTILINE)
 
     # 6. Telegram bullet points: '• item' → '- item'
     output = re.sub(r'^•\s*', '- ', output, flags=re.MULTILINE)
