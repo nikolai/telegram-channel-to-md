@@ -51,7 +51,6 @@ except ImportError:
 
 # ─── Конфигурация ────────────────────────────────────────────────────────────
 
-DEFAULT_CHANNEL_LINK = "CHANNEL_URL_REMOVED"
 OUTPUT_DIR = "telegram_backup"
 RESOURCES_DIR = "resources"
 MD_FILENAME = "channel_messages.md"
@@ -506,8 +505,8 @@ def main():
     parser.add_argument(
         "--channel",
         type=str,
-        default=DEFAULT_CHANNEL_LINK,
-        help=f"Ссылка на канал (по умолчанию: {DEFAULT_CHANNEL_LINK})"
+        required=True,
+        help="Ссылка на канал (например: https://t.me/username)"
     )
     parser.add_argument(
         "--output",

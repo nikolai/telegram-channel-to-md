@@ -47,15 +47,15 @@ python download_telegram_channel.py [OPTIONS]
 |------|-------------|---------|
 | `--api-id` | Telegram API ID | `$TELEGRAM_API_ID` |
 | `--api-hash` | Telegram API Hash | `$TELEGRAM_API_HASH` |
-| `--channel` | Channel URL or username | `CHANNEL_URL_REMOVED` |
+| `--channel` | Channel URL or username (**required**) | — |
 | `--output` | Output directory | `telegram_backup` |
 | `--limit` | Max messages to fetch | all |
 
 ### Examples
 
 ```bash
-# Export your saved messages / personal channel
-python download_telegram_channel.py --channel CHANNEL_URL_REMOVED
+# Export your personal channel
+python download_telegram_channel.py --channel https://t.me/yourchannel
 
 # Export a public channel, limit to last 100 messages
 python download_telegram_channel.py --channel https://t.me/somechannel --limit 100
