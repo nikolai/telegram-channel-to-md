@@ -237,6 +237,9 @@ def telegram_to_markdown(text: str, entities: list | None) -> str:
     # Паттерн 3: если ``` в начале строки, но без переноса перед
     output = re.sub(r'([^\n])```(\w*)$', r'\1\n```\2', output, flags=re.MULTILINE)
 
+    # 6. Telegram bullet points: '• item' → '- item'
+    output = re.sub(r'^•\s*', '- ', output, flags=re.MULTILINE)
+
     return output
 
 
