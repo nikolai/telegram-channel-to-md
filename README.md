@@ -11,11 +11,17 @@ Downloads all messages and media from a Telegram channel and exports them as a s
 - Skips already-downloaded media on re-runs (incremental updates)
 - Saves everything to `<output_dir>/channel_messages.md`
 
-## Requirements
+## Installation
 
-Python 3.10+ (uses `X | Y` type union syntax and `list[tuple]` generics).
+Python 3.10+ required (uses `X | Y` union syntax and `list[tuple]` generics).
 
 ```bash
+git clone https://github.com/nikolai/telegram-channel-to-md
+cd telegram-channel-to-md
+
+python3 -m venv .venv
+source .venv/bin/activate      # Windows: .venv\Scripts\activate
+
 pip install -r requirements.txt
 ```
 
